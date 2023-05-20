@@ -1,21 +1,21 @@
 import { gql } from "@apollo/client";
 
 export const GET_REPOSITORY = gql`
-query MyQuery {
-  user(login: "gnulitskaya") {
-    id
-    avatarUrl
-    name
-    repositories(first: 10) {
-      edges {
-        node {
-          id
-          name
-          url
-          pushedAt
-          stargazerCount
-        }
+query ($first: Int!, $location: String!) {
+  search(query: $location, type: REPOSITORY, first: $first) {
+    nodes {
+      ... on Repository {
+        id
+        name
+        stargazerCount
+        pushedAt
       }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
     }
   }
 }

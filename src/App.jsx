@@ -8,12 +8,14 @@ import "./styles/App.scss";
 import Header from "./components/Header.jsx";
 import {AppContext} from "./contexts/AppContext.jsx";
 import RepositoryList from "./components/RepositoryList.jsx";
+import SearchField from "./UI/SearchField.jsx";
+import Loading from "./UI/Loading.jsx";
 // import Repository from "./components/Repository.jsx";
 // import RepositoryList from "./components/RepositoryList.jsx";
 
 function App() {
     // const { loading, error, data } = useQuery(GET_REPOSITORY);
-    const { loading, fetchData, data } = useContext(AppContext);
+    const { loading, data, fetchData } = useContext(AppContext);
 
     // if (loading) return <p>Loading...</p>;
     // if (error) return <p>Error : {error.message}</p>;
@@ -30,10 +32,16 @@ function App() {
     return (
         <div className='wrapper'>
             <Header/>
+
             {/*{data.repository.issues.edges}*/}
             {/*/!*{data}*!/*/}
             {/*{data != null ? data.repository.issues.edges.length : ''}*/}
-            <RepositoryList data={data} />
+            {loading ? (
+                <Loading size='50' />
+            ) : (
+                <RepositoryList data={data}/>
+            )}
+
         </div>
     )
 }
