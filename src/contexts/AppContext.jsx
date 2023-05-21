@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 import { useQuery } from '@apollo/client';
-import {GET_REPOSITORY} from "../query/query.js";
+import {GET_REPOSITORIES, GET_REPOSITORY} from "../query/query.js";
 
 export const AppContext = createContext();
 
@@ -10,8 +10,15 @@ export const AppProvider = ({ children }) => {
     const [currentCountry, setCurrentCountry] = useState('russia');
     const [searchValue, setSearchValue] = useState('');
 
-    const { loading, data, fetchMore } = useQuery(GET_REPOSITORY, {
+    const [owner, setOwner] = useState('');
+    const [name, setNameRepository] = useState('');
+
+    const { loading, data, fetchMore } = useQuery(GET_REPOSITORIES, {
         variables: { first, location }
+    });
+
+    const { loading2, data2 } = useQuery(GET_REPOSITORY, {
+        variables: { name, owner }
     });
 
     const fetchData = () => {
@@ -39,7 +46,11 @@ export const AppProvider = ({ children }) => {
                 setCurrentCountry,
                 setLocation,
                 searchValue,
-                setSearchValue
+                setSearchValue,
+                setOwner,
+                setNameRepository,
+                loading2,
+                data2
             }}
         >
             {children}

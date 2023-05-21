@@ -1,48 +1,25 @@
 import React from "react";
-import { useContext } from 'react';
-import { useQuery } from "@apollo/client";
-
-import { GET_REPOSITORY } from "./query/query.js";
-
 import "./styles/App.scss";
-import Header from "./components/Header.jsx";
-import {AppContext} from "./contexts/AppContext.jsx";
-import RepositoryList from "./components/RepositoryList.jsx";
-import SearchField from "./UI/SearchField.jsx";
-import Loading from "./UI/Loading.jsx";
-// import Repository from "./components/Repository.jsx";
-// import RepositoryList from "./components/RepositoryList.jsx";
+import {BrowserRouter, Link, Router} from "react-router-dom";
+import {AppProvider} from "./contexts/AppContext.jsx";
+import AppRouter from "./components/AppRouter.jsx";
 
 function App() {
-    // const { loading, error, data } = useQuery(GET_REPOSITORY);
-    const { loading, data, fetchData } = useContext(AppContext);
-
-    // if (loading) return <p>Loading...</p>;
-    // if (error) return <p>Error : {error.message}</p>;
-    // const { pinnedItems } = data.user;
-    // console.log(data['repository']);
-    if (data != null) {
-        // for (let value of Object.values(data)) {
-        //     alert(value); // John, затем 30
-        // }
-        console.log(data)
-    }
-
 
     return (
-        <div className='wrapper'>
-            <Header/>
 
-            {/*{data.repository.issues.edges}*/}
-            {/*/!*{data}*!/*/}
-            {/*{data != null ? data.repository.issues.edges.length : ''}*/}
-            {loading ? (
-                <Loading size='50' />
-            ) : (
-                <RepositoryList data={data}/>
-            )}
-
+        <div>
+            <ul>
+                <li>
+                    <Link to="/">Home</Link>
+                </li>
+                <li>
+                    <Link to="/about/:id">About</Link>
+                </li>
+            </ul>
+            <AppRouter/>
         </div>
+
     )
 }
 

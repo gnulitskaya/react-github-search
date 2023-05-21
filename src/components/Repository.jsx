@@ -1,10 +1,23 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {useNavigate} from "react-router-dom";
+import {AppContext} from "../contexts/AppContext.jsx";
 
 const Repository = (props) => {
     const rep = props.rep;
+    const navigate = useNavigate();
+
+    const {setOwner, setNameRepository} =
+        useContext(AppContext);
+
+    const openMoreInfo = () => {
+        console.log('dcsdcdcd', rep.owner.login, rep.name);
+        setOwner(rep.owner.login);
+        setNameRepository(rep.name);
+        navigate(`/about/${rep.id}`);
+    }
 
     return (
-        <div className="repository-item">
+        <div className="repository-item" onClick={openMoreInfo}>
             <div className="repository-item__header">
                 <svg width="30px" height="30px" xmlns="http://www.w3.org/2000/svg" role="img"
                      viewBox="0 0 24 24" fill="none" stroke="#64ffda" strokeWidth="1" strokeLinecap="round"
@@ -24,7 +37,7 @@ const Repository = (props) => {
                         </a>
                     </li>
                     <li className="links-list__item">
-                        <a href="">
+                        <a target='_blank' href={rep.url}>
                             <svg width="25px" height="25px" role="img" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github"
                                  className="svg-inline--fa fa-github fa-w-16 fa-lg" xmlns="http://www.w3.org/2000/svg"
                                  viewBox="0 0 496 512">

@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const GET_REPOSITORY = gql`
+export const GET_REPOSITORIES = gql`
 query ($first: Int!, $location: String!) {
   search(query: $location, type: REPOSITORY, first: $first) {
     nodes {
@@ -9,6 +9,11 @@ query ($first: Int!, $location: String!) {
         name
         stargazerCount
         pushedAt
+        url
+        owner {
+          id
+          login
+        }
       }
     }
     pageInfo {
@@ -19,27 +24,30 @@ query ($first: Int!, $location: String!) {
     }
   }
 }
-
 `;
-// query GetRepository {
-//   repository(owner:"g", name:"Hello-World") {
-//     issues(last:20, states:CLOSED) {
-//       edges {
-//         node {
-//           title
-//           url
-//           labels(first:5) {
-//             edges {
-//               node {
-//                 name
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
-// const {pinnedItems} = GET_REPOSITORY.data;
-//
-// console.log('pinnedItems', pinnedItems);
+
+export const GET_REPOSITORY = gql`
+query GetRepository($name: String!, $owner: String!) {
+    repository(name: $name, owner: $owner) {
+        id
+        name
+        stargazerCount
+        pushedAt
+        description
+        languages(first: 10) {
+          edges {
+            node {
+              id
+              name
+            }
+          }
+        }
+        owner {
+            id
+            login
+            avatarUrl
+            url
+        }
+    }
+}
+`;
