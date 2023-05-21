@@ -93,14 +93,24 @@
   padding: 10px 15px;
   color: #1a1a1a;
   border-radius: 8px;
+  outline: none;
+  font-size: 24px;
 }
 
 .header-content {
-  background: linear-gradient(157deg, #333333 15%, #6e5494 88%);
+  // background: linear-gradient(157deg, #333333 15%, #6e5494 88%);
   width: 100%;
   text-align: center;
   border-radius: 15px;
-  padding: 20px;
+  padding: 20px 20px 40px 20px;
+  background: hsla(213, 77%, 14%, 1);
+
+  background: linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);
+
+  background: -moz-linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);
+
+  background: -webkit-linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);
+
 }
 
 .repository-info {

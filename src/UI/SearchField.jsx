@@ -13,7 +13,7 @@ const SearchField = () => {
         typingTimer = setTimeout(() => {
             setSearchValue(e.target.value);
             setLocation(`${e.target.value} location:${currentCountry}`);
-        }, 1);
+        }, 600);
     };
 
     return (
