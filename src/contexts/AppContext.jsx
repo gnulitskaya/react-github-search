@@ -17,9 +17,11 @@ export const AppProvider = ({ children }) => {
         variables: { first, location }
     });
 
-    const { loading2, data2 } = useQuery(GET_REPOSITORY, {
+    const resp = useQuery(GET_REPOSITORY, {
         variables: { name, owner }
     });
+
+    console.log('data2', resp);
 
     const fetchData = () => {
         const { endCursor } = data.search.pageInfo;
@@ -49,11 +51,10 @@ export const AppProvider = ({ children }) => {
                 setSearchValue,
                 setOwner,
                 setNameRepository,
-                loading2,
-                data2
+                resp
             }}
         >
-            {children}
+            { children }
         </AppContext.Provider>
     );
 };
