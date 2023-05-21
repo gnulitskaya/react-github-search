@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_REPOSITORIES = gql`
-query ($first: Int!, $location: String!) {
-  search(query: $location, type: REPOSITORY, first: $first) {
+query ($first: Int!, $location: String!, $after: String) {
+  search(query: $location, type: REPOSITORY, after: $after, first: $first) {
     nodes {
       ... on Repository {
         id

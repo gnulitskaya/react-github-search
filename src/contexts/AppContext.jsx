@@ -5,10 +5,13 @@ import {GET_REPOSITORIES, GET_REPOSITORY} from "../query/query.js";
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-    const first = 20;
+    const first = 10;
     const [location, setLocation] = useState('location:russia');
     const [currentCountry, setCurrentCountry] = useState('russia');
     const [searchValue, setSearchValue] = useState('');
+    const [after, setAfter] = useState('');
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
 
     const [owner, setOwner] = useState('');
     const [name, setNameRepository] = useState('');
@@ -51,6 +54,8 @@ export const AppProvider = ({ children }) => {
                 setSearchValue,
                 setOwner,
                 setNameRepository,
+                after,
+                setAfter,
                 resp
             }}
         >

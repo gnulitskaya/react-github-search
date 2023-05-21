@@ -17,7 +17,7 @@ const Repository = (props) => {
     }
 
     return (
-        <div className="repository-item" onClick={openMoreInfo}>
+        <div className="repository-item">
             <div className="repository-item__header">
                 <svg width="30px" height="30px" xmlns="http://www.w3.org/2000/svg" role="img"
                      viewBox="0 0 24 24" fill="none" stroke="#64ffda" strokeWidth="1" strokeLinecap="round"
@@ -49,7 +49,7 @@ const Repository = (props) => {
                 </ul>
             </div>
 
-            <div className="repository-item__title">{rep.name} </div>
+            <div className="repository-item__title" onClick={openMoreInfo}>{rep.name} </div>
 
             <div className="repository-item__bottom">
                 <div className="repository-item__star">
