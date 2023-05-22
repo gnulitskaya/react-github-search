@@ -3,16 +3,20 @@ import { gql } from "@apollo/client";
 export const GET_REPOSITORIES = gql`
 query ($first: Int!, $location: String!, $after: String) {
   search(query: $location, type: REPOSITORY, after: $after, first: $first) {
-    nodes {
-      ... on Repository {
-        id
-        name
-        stargazerCount
-        pushedAt
-        url
-        owner {
-          id
-          login
+    repositoryCount
+    edges {
+      cursor
+      node {
+        ... on Repository {
+            id
+            name
+            stargazerCount
+            pushedAt
+            url
+            owner {
+                id
+                login
+            }
         }
       }
     }
@@ -22,24 +26,37 @@ query ($first: Int!, $location: String!, $after: String) {
       hasPreviousPage
       startCursor
     }
-    repositoryCount
   }
 }
 `;
 
-export const GET_PAGES = gql`
-query GetPageNumber ($firstPage: Int!, $location: String!) {
-  search(query: $location, type: REPOSITORY, first: $firstPage) {
-    pageInfo {
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-    }
-    repositoryCount
-  }
-}
-`;
+// nodes {
+// ... on Repository {
+//         id
+//         name
+//         stargazerCount
+//         pushedAt
+//         url
+//         owner {
+//             id
+//             login
+//         }
+//     }
+// }
+
+// export const GET_PAGES = gql`
+// query GetPageNumber ($firstPage: Int!, $location: String!) {
+//   search(query: $location, type: REPOSITORY, first: $firstPage) {
+//     pageInfo {
+//       endCursor
+//       hasNextPage
+//       hasPreviousPage
+//       startCursor
+//     }
+//     repositoryCount
+//   }
+// }
+// `;
 
 export const GET_REPOSITORY = gql`
 query GetRepository($name: String!, $owner: String!) {

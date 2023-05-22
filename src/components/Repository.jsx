@@ -3,12 +3,10 @@ import {useNavigate, useParams} from "react-router-dom";
 import {AppContext} from "../contexts/AppContext.jsx";
 
 const Repository = (props) => {
-    const rep = props.rep;
+    const rep = props.rep.node;
     const navigate = useNavigate();
 
     const openMoreInfo = () => {
-        console.log('dcsdcdcd', rep.owner.login, rep.name);
-
         navigate(`/about/${rep.name}/${rep.owner.login}`);
     }
 

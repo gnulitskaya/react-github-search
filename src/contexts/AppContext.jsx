@@ -1,20 +1,20 @@
 import { createContext, useState } from 'react';
 import { useQuery } from '@apollo/client';
-import {GET_PAGES, GET_REPOSITORIES, GET_REPOSITORY} from "../query/query.js";
+import {GET_REPOSITORIES, GET_REPOSITORY} from "../query/query.js";
 import {getPageCount} from "../utils/pages.js";
 
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
     // const first = 10;
-    const [first, setFirst] = useState(2);
-    const [firstPage, setFirstPage] = useState(2);
+    const [first, setFirst] = useState(10);
+    // const [firstPage, setFirstPage] = useState(2);
 
     const [location, setLocation] = useState('location:russia');
     const [currentCountry, setCurrentCountry] = useState('russia');
     const [searchValue, setSearchValue] = useState('');
 
-    const [after, setAfter] = useState('Y3Vyc29yOjE=');
+    const [after, setAfter] = useState(null);
     const [page, setPage] = useState(1);
 
     const [totalCount, setTotalCount] = useState(0);
@@ -32,11 +32,12 @@ export const AppProvider = ({ children }) => {
         variables: { name, owner }
     });
 
-    const getPageNumber = useQuery(GET_PAGES, {
-        variables: { firstPage, location }
-    });
+    // const getPageNumber = useQuery(GET_PAGES, {
+    //     variables: { firstPage, location }
+    // });
 
     const fetchData = () => {
+        console.log('ssss');
         const { endCursor } = data.search.pageInfo;
 
         fetchMore({
@@ -65,17 +66,14 @@ export const AppProvider = ({ children }) => {
                 setSearchValue,
                 setOwner,
                 setNameRepository,
-                after,
-                setAfter,
                 resp,
                 page,
                 setPage,
                 first,
                 totalCount,
                 setTotalCount,
-                getPageNumber,
-                firstPage,
-                setFirstPage
+                after,
+                setAfter
             }}
         >
             { children }

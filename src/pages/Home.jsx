@@ -9,33 +9,43 @@ import Button from "../UI/Button.jsx";
 // import "./styles/App.scss";
 
 const Home = () => {
-    // const { loading, error, data } = useQuery(GET_REPOSITORY);
-    const [totalPages, setTotalPages] = useState(0);
 
-    const { loading, data, setTotalCount,
-        totalCount, first, page, setPage,
-        setAfter, after, getPageNumber, setFirstPage} = useContext(AppContext);
+    const { loading, data, page, fetchData, setAfter, first, setPage} = useContext(AppContext);
+    const endCursor = data?.search.pageInfo.endCursor;
+    console.log('ddd', data);
+    let pageNumberArray = getPagesArray(getPageCount(data?.search.repositoryCount, first));
 
-    console.log('totalPages', getPageNumber);
-    let pagesArray = [1];
-    // let isChangePage = false;
+    const handlePageClick = (cursor, number) => {
+        setAfter(cursor);
+        setPage(number);
 
-    const changePage = (page) => {
-        // setPage(page);
-        // setFirstPage(getPagesPagination(first, page)); // 16
-        // setAfter(getPageNumber?.data.search.pageInfo.endCursor);
-    }
+        console.log('page', page);
+    };
 
-    useEffect(() => {
+    // const changePage = (page) => {
+    //     //fetchData();
+    //     console.log(data)
+    //     setPage(page);
+    //     // setFirstPage(getPagesPagination(first, page)); // 16
+    //     setAfter(data?.search.pageInfo.endCursor);
+    // }
 
-        setTotalPages(getPageCount(totalCount, first));
-        pagesArray = getPagesArray(totalPages);
-        console.log('totalCount', totalCount)
-        console.log('pagesArray', pagesArray, totalPages)
-        setTotalCount(data?.search.repositoryCount);
+    // useEffect(() => {
+    //
+    //     // setTotalPages(getPageCount(totalCount, first));
+    //     // pagesArray = getPagesArray(totalPages);
+    //     // console.log('totalCount', totalCount)
+    //     // console.log('pagesArray', pagesArray, totalPages)
+    //     // setTotalCount(data?.search.repositoryCount);
+    //
+    // }, []);
 
-    }, []);
-
+    // const pageNumbers = [];
+    //
+    // for (let i = 1; i <= 10; i++) {
+    //     pageNumbers.push(i);
+    // }
+    // console.log('pageNumbers', pageNumbers)
     return (
         <div className='wrapper'>
             <Header/>
@@ -43,23 +53,20 @@ const Home = () => {
             {loading ? (
                 <Loading size='50' />
             ) : (
-                <RepositoryList data={data}/>
+                <RepositoryList data={data} fetchData={fetchData}/>
             )}
 
-            {getPageNumber.loading ? (
-                ''
-            ) : (
                 <div className="pagination">
-                    {pagesArray.map(p =>
+                    {pageNumberArray.map(number =>
                         <Button
-                            onClick={() => changePage(p)}
-                            key={p}
-                            className={page === p ? 'current' : ''}>
-                            {p}
+                            onClick={() => handlePageClick(number === 1 ? null : endCursor, number)}
+                            key={number}
+                            className={page === number ? 'current' : ''}>
+                            {number}
                         </Button>
                     )}
                 </div>
-            )}
+
         </div>
     )
 }
