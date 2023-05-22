@@ -11,3 +11,7 @@ export const getPagesArray = (totalPages) => {
 
     return result;
 }
+
+export const getPagesPagination = (first, page) => {
+    return first * page;
+}

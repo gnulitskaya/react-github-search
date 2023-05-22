@@ -1,32 +1,40 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { useContext } from 'react';
 import Header from "../components/Header.jsx";
 import Loading from "../UI/Loading.jsx";
 import RepositoryList from "../components/RepositoryList.jsx";
 import {AppContext} from "../contexts/AppContext.jsx";
-import {getPageCount, getPagesArray} from "../utils/pages.js";
+import {getPageCount, getPagesArray, getPagesPagination} from "../utils/pages.js";
 import Button from "../UI/Button.jsx";
 // import "./styles/App.scss";
 
-function Home() {
+const Home = () => {
     // const { loading, error, data } = useQuery(GET_REPOSITORY);
-    const { loading, data, setTotalPages,
-        totalCount, first, totalPages, page, setPage,
-        setAfter, after} = useContext(AppContext);
+    const [totalPages, setTotalPages] = useState(0);
 
-    // console.log('totalPages', totalPages);
-    let pagesArray = getPagesArray(totalPages);
+    const { loading, data, setTotalCount,
+        totalCount, first, page, setPage,
+        setAfter, after, getPageNumber, setFirstPage} = useContext(AppContext);
+
+    console.log('totalPages', getPageNumber);
+    let pagesArray = [1];
     // let isChangePage = false;
-    // console.log('11111',data.search.pageInfo.endCursor);
-    useEffect(() => {
-        setTotalPages(getPageCount(totalCount, first));
-    }, []);
 
     const changePage = (page) => {
-        setPage(page);
-        setAfter(data?.search.pageInfo.endCursor);
-        console.log('2222',data.search.pageInfo.endCursor);
+        // setPage(page);
+        // setFirstPage(getPagesPagination(first, page)); // 16
+        // setAfter(getPageNumber?.data.search.pageInfo.endCursor);
     }
+
+    useEffect(() => {
+
+        setTotalPages(getPageCount(totalCount, first));
+        pagesArray = getPagesArray(totalPages);
+        console.log('totalCount', totalCount)
+        console.log('pagesArray', pagesArray, totalPages)
+        setTotalCount(data?.search.repositoryCount);
+
+    }, []);
 
     return (
         <div className='wrapper'>
@@ -38,17 +46,20 @@ function Home() {
                 <RepositoryList data={data}/>
             )}
 
-            <div className="pagination">
-                {pagesArray.map(p =>
-                    <Button
-                        onClick={() => changePage(p)}
-                        key={p}
-                        className={page === p ? 'current' : ''}>
-                        {p}
-                    </Button>
-                )}
-            </div>
-
+            {getPageNumber.loading ? (
+                ''
+            ) : (
+                <div className="pagination">
+                    {pagesArray.map(p =>
+                        <Button
+                            onClick={() => changePage(p)}
+                            key={p}
+                            className={page === p ? 'current' : ''}>
+                            {p}
+                        </Button>
+                    )}
+                </div>
+            )}
         </div>
     )
 }

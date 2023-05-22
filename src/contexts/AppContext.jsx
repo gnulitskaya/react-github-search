@@ -1,24 +1,28 @@
 import { createContext, useState } from 'react';
 import { useQuery } from '@apollo/client';
-import {GET_REPOSITORIES, GET_REPOSITORY} from "../query/query.js";
+import {GET_PAGES, GET_REPOSITORIES, GET_REPOSITORY} from "../query/query.js";
 import {getPageCount} from "../utils/pages.js";
 
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
     // const first = 10;
-    const [first, setFirst] = useState(10);
+    const [first, setFirst] = useState(2);
+    const [firstPage, setFirstPage] = useState(2);
+
     const [location, setLocation] = useState('location:russia');
     const [currentCountry, setCurrentCountry] = useState('russia');
     const [searchValue, setSearchValue] = useState('');
 
     const [after, setAfter] = useState('Y3Vyc29yOjE=');
     const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
-    const [totalCount, setTotalCount] = useState(100);
+
+    const [totalCount, setTotalCount] = useState(0);
 
     const [owner, setOwner] = useState('');
     const [name, setNameRepository] = useState('');
+
+    // const [pageNumber, setPageNumber] = useState(2);
 
     const { loading, data, fetchMore } = useQuery(GET_REPOSITORIES, {
         variables: { first, location, after }
@@ -26,6 +30,10 @@ export const AppProvider = ({ children }) => {
 
     const resp = useQuery(GET_REPOSITORY, {
         variables: { name, owner }
+    });
+
+    const getPageNumber = useQuery(GET_PAGES, {
+        variables: { firstPage, location }
     });
 
     const fetchData = () => {
@@ -63,10 +71,11 @@ export const AppProvider = ({ children }) => {
                 page,
                 setPage,
                 first,
-                totalPages,
-                setTotalPages,
                 totalCount,
-                setTotalCount
+                setTotalCount,
+                getPageNumber,
+                firstPage,
+                setFirstPage
             }}
         >
             { children }

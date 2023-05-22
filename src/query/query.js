@@ -27,6 +27,20 @@ query ($first: Int!, $location: String!, $after: String) {
 }
 `;
 
+export const GET_PAGES = gql`
+query GetPageNumber ($firstPage: Int!, $location: String!) {
+  search(query: $location, type: REPOSITORY, first: $firstPage) {
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+    repositoryCount
+  }
+}
+`;
+
 export const GET_REPOSITORY = gql`
 query GetRepository($name: String!, $owner: String!) {
     repository(name: $name, owner: $owner) {
