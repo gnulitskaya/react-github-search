@@ -1,19 +1,15 @@
 import React, {useContext} from 'react';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {AppContext} from "../contexts/AppContext.jsx";
 
 const Repository = (props) => {
     const rep = props.rep;
     const navigate = useNavigate();
 
-    const {setOwner, setNameRepository} =
-        useContext(AppContext);
-
     const openMoreInfo = () => {
         console.log('dcsdcdcd', rep.owner.login, rep.name);
-        setOwner(rep.owner.login);
-        setNameRepository(rep.name);
-        navigate(`/about/${rep.id}`);
+
+        navigate(`/about/${rep.name}/${rep.owner.login}`);
     }
 
     return (
