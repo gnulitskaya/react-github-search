@@ -22,6 +22,7 @@ query ($first: Int!, $location: String!, $after: String) {
       hasPreviousPage
       startCursor
     }
+    repositoryCount
   }
 }
 `;

@@ -138,3 +138,14 @@
     margin-bottom: 10px;
   }
 }
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.current {
+  color: #535bf2;
+}
