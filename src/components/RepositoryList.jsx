@@ -2,8 +2,6 @@ import React from 'react';
 import Repository from "./Repository.jsx";
 
 const RepositoryList = ({data, fetchData}) => {
-    console.log('zxzXz', data);
-    console.log('fff', fetchData);
     return (
         <div className='repository-list'>
             {data ? (

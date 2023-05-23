@@ -2,15 +2,13 @@ import React, {useContext, useEffect} from 'react';
 import {AppContext} from "../contexts/AppContext.jsx";
 import Loading from "../UI/Loading.jsx";
 import Time from 'react-time-format'
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 const About = () => {
     const { resp: { data, loading },
         setOwner, setNameRepository } = useContext(AppContext);
     const rep = data?.repository;
-
     const params = useParams();
-
     const results = [];
 
     useEffect(() => {
@@ -26,6 +24,8 @@ const About = () => {
 
     return (
         <div className='wrapper'>
+            <Link to="/">BACK</Link>
+
             {loading ? (
                 <Loading size='50' />
             ) : (
@@ -37,7 +37,7 @@ const About = () => {
                         <img src={rep?.owner.avatarUrl} alt=""/>
                         <div className="repository-info__header header-info">
                             <h2 className="header-info__title">
-                                <a href={rep?.owner.url}>
+                                <a target="_blank" href={rep?.owner.url}>
                                     { rep?.owner.login }</a>
                             </h2>
                             <div className="header-info__star">

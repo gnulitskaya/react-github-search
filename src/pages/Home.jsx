@@ -12,14 +12,12 @@ const Home = () => {
 
     const { loading, data, page, fetchData, setAfter, first, setPage} = useContext(AppContext);
     const endCursor = data?.search.pageInfo.endCursor;
-    console.log('ddd', data);
+
     let pageNumberArray = getPagesArray(getPageCount(data?.search.repositoryCount, first));
 
     const handlePageClick = (cursor, number) => {
         setAfter(cursor);
         setPage(number);
-
-        console.log('page', page);
     };
 
     // const changePage = (page) => {
@@ -46,6 +44,7 @@ const Home = () => {
     //     pageNumbers.push(i);
     // }
     // console.log('pageNumbers', pageNumbers)
+
     return (
         <div className='wrapper'>
             <Header/>

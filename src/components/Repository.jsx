@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {AppContext} from "../contexts/AppContext.jsx";
+import Time from "react-time-format";
 
 const Repository = (props) => {
     const rep = props.rep.node;
@@ -11,7 +12,7 @@ const Repository = (props) => {
     }
 
     return (
-        <div className="repository-item">
+        <div className="repository-item" onClick={openMoreInfo}>
             <div className="repository-item__header">
                 <svg width="30px" height="30px" xmlns="http://www.w3.org/2000/svg" role="img"
                      viewBox="0 0 24 24" fill="none" stroke="#64ffda" strokeWidth="1" strokeLinecap="round"
@@ -23,7 +24,8 @@ const Repository = (props) => {
                         <a href="">
                             <svg width="25px" height="25px" xmlns="http://www.w3.org/2000/svg" role="img"
                                  viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                                 strokeLinejoin="round" className="feather feather-external-link"><title>External Link</title>
+                                 strokeLinejoin="round" className="feather feather-external-link">
+                                <title>External Link</title>
                                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                                 <polyline points="15 3 21 3 21 9"></polyline>
                                 <line x1="10" y1="14" x2="21" y2="3"></line>
@@ -43,7 +45,9 @@ const Repository = (props) => {
                 </ul>
             </div>
 
-            <div className="repository-item__title" onClick={openMoreInfo}>{rep.name} </div>
+            <div className="repository-item__title">
+                <span>{rep.name}</span>
+            </div>
 
             <div className="repository-item__bottom">
                 <div className="repository-item__star">
@@ -54,21 +58,9 @@ const Repository = (props) => {
                               d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path>
                     </svg>
                     {rep.stargazerCount}</div>
-                <div className="repository-item__data">{rep.pushedAt}</div>
+                <div className="repository-item__data"><Time value={rep?.pushedAt} format="YYYY-MM-DD" /></div>
             </div>
 
-            {/*<div className="repository-item__owner owner-repository">*/}
-            {/*    <div className="owner-repository-item__avatar"></div>*/}
-            {/*    <div className="owner-repository-item__name"></div>*/}
-            {/*</div>*/}
-
-            {/*<ul className="repository-item__topics topics-list">*/}
-            {/*    <li className="topics-list__item"></li>*/}
-            {/*</ul>*/}
-
-            {/*<div className="repository-item__description">*/}
-
-            {/*</div>*/}
         </div>
     );
 };

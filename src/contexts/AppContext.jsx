@@ -37,7 +37,6 @@ export const AppProvider = ({ children }) => {
     // });
 
     const fetchData = () => {
-        console.log('ssss');
         const { endCursor } = data.search.pageInfo;
 
         fetchMore({
