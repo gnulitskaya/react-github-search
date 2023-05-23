@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../components/Header.jsx";
 import Loading from "../UI/Loading.jsx";
 import RepositoryList from "../components/RepositoryList.jsx";
-import {getPageCount, getPagesArray} from "../utils/pages.js";
+import {getPageCount, getPagesArray, getPagesPagination} from "../utils/pages.js";
 import Button from "../UI/Button.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {GET_REPOSITORIES} from "../query/query.js";
@@ -17,18 +17,14 @@ const Home = () => {
     const after = useSelector((state) => state.after);
     const location = useSelector((state) => state.location);
     const page = useSelector((state) => state.page);
+    const endCursor = useSelector((state) => state.endCursor);
 
-    const { loading, error, data } =
-        useQuery(GET_REPOSITORIES, {
+    const { loading, error, data } = useQuery(GET_REPOSITORIES, {
         variables: { first, location, after },
-        onCompleted: (data) =>
-            dispatch(setRepositories(data.search)),
+        onCompleted: (data) => dispatch(setRepositories(data.search)),
     });
 
-    console.log('data', data)
-
-    let pageNumberArray = getPagesArray(getPageCount(data?.search.repositoryCount, first));
-    const endCursor = data?.search.pageInfo.endCursor;
+    let pageNumberArray = getPagesArray(getPageCount(data?.repositoryCount, first));
 
     const handlePageClick = (cursor, number) => {
         dispatch(setAfter(cursor));
