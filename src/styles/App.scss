@@ -142,12 +142,19 @@
 
   @media (max-width: 767.98px) {
     grid-template-columns: auto;
+    font-size: 20px;
   }
 
   img {
     width: 100%;
     border-radius: .3rem;
     border: 2px solid #64f0a9;
+    @media (max-width: 767.98px) {
+      width: auto;
+    }
+    @media (max-width: 575.98px) {
+      width: 100%;
+    }
   }
 }
 

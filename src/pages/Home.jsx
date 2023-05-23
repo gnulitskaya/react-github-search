@@ -17,14 +17,14 @@ const Home = () => {
     const after = useSelector((state) => state.after);
     const location = useSelector((state) => state.location);
     const page = useSelector((state) => state.page);
-    const endCursor = useSelector((state) => state.endCursor);
 
     const { loading, error, data } = useQuery(GET_REPOSITORIES, {
         variables: { first, location, after },
         onCompleted: (data) => dispatch(setRepositories(data.search)),
     });
 
-    let pageNumberArray = getPagesArray(getPageCount(data?.repositoryCount, first));
+    let pageNumberArray = getPagesArray(getPageCount(data?.search.repositoryCount, first));
+    const endCursor = data?.search.pageInfo.endCursor;
 
     const handlePageClick = (cursor, number) => {
         dispatch(setAfter(cursor));
