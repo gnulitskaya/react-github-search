@@ -1,6 +1,5 @@
-import React, {useContext} from 'react';
-import {useNavigate, useParams} from "react-router-dom";
-import {AppContext} from "../contexts/AppContext.jsx";
+import React from 'react';
+import {useNavigate} from "react-router-dom";
 import Time from "react-time-format";
 
 const Repository = (props) => {

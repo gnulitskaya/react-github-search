@@ -1,12 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
-// import {AppContext} from "../contexts/AppContext.jsx";
 import Loading from "../UI/Loading.jsx";
 import Time from 'react-time-format'
 import {Link, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useQuery} from "@apollo/client";
 import {GET_REPOSITORIES} from "../query/query.js";
-import {setRepositories, setRepositoryActive} from "../store/actions/repoActions.js";
+import {setRepositoryActive} from "../store/actions/repoActions.js";
 
 const About = () => {
 
@@ -24,7 +23,6 @@ const About = () => {
             data.search.edges.find(rep => rep.node.id === params.id).node)),
     });
 
-    console.log('id', data.search.edges.find(rep => rep.node.id === params.id).node);
     const results = [];
 
     activeRepository?.languages.edges.forEach((item, index) => {

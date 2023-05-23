@@ -3,7 +3,6 @@ import {
     SET_ACTIVE_REPOSITORY,
     SET_LOCATION,
     SET_AFTER,
-    SET_FIRST,
     SET_PAGE
 } from '../types'
 
@@ -24,11 +23,6 @@ export const setLocation = (activeRep) => ({
 
 export const setAfter = (activeRep) => ({
     type: SET_AFTER,
-    payload: activeRep,
-});
-
-export const setFirst = (activeRep) => ({
-    type: SET_FIRST,
     payload: activeRep,
 });
 

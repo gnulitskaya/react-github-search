@@ -1,10 +1,15 @@
-import {SET_REPOSITORIES, SET_ACTIVE_REPOSITORY, SET_LOCATION, SET_FIRST, SET_AFTER, SET_PAGE } from '../types';
+import {
+    SET_REPOSITORIES,
+    SET_ACTIVE_REPOSITORY,
+    SET_LOCATION,
+    SET_AFTER,
+    SET_PAGE } from '../types';
 
 const initialState = {
     repositories: [],
     repositoryCount: null,
     activeRepository: null,
-    location: 'location:russia',
+    location: 'location:all',
     after: null,
     first: 10,
     page: 1
@@ -31,11 +36,6 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 after: action.payload,
-            };
-        case SET_FIRST:
-            return {
-                ...state,
-                first: action.payload,
             };
         case SET_PAGE:
             return {
