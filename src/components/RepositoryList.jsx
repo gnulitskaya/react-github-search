@@ -6,7 +6,7 @@ const RepositoryList = ({data}) => {
     return (
         <div className='repository-list'>
             { (data && data.length > 0) ? (
-                data.map((rep, index) => <Repository key={index} rep={rep} />)
+                data.edges.map((rep, index) => <Repository key={index} rep={rep} />)
             ) : (
                 <h1>No results!</h1>
             )}

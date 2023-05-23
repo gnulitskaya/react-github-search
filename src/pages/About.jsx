@@ -9,16 +9,14 @@ import {GET_REPOSITORIES} from "../query/query.js";
 import {setRepositories, setRepositoryActive} from "../store/actions/repoActions.js";
 
 const About = () => {
-    // const { resp: { data, loading },
-    //     setOwner, setNameRepository } = useContext(AppContext);
-
-    const [first, setFirst] = useState(10);
-    const [after, setAfter] = useState(null);
-    const [location, setLocation] = useState('location:russia');
 
     const params = useParams();
     const dispatch = useDispatch();
     const activeRepository = useSelector((state) => state.activeRepository);
+
+    const first = useSelector((state) => state.first);
+    const after = useSelector((state) => state.after);
+    const location = useSelector((state) => state.location);
 
     const { loading, error, data } = useQuery(GET_REPOSITORIES, {
         variables: { first, location, after },

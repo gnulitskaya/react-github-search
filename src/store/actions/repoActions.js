@@ -1,6 +1,10 @@
 import {
     SET_REPOSITORIES,
-    SET_ACTIVE_REPOSITORY, SET_LOCATION, SET_AFTER, SET_FIRST
+    SET_ACTIVE_REPOSITORY,
+    SET_LOCATION,
+    SET_AFTER,
+    SET_FIRST,
+    SET_PAGE
 } from '../types'
 
 export const setRepositories = (repositories) => ({
@@ -28,3 +32,7 @@ export const setFirst = (activeRep) => ({
     payload: activeRep,
 });
 
+export const setPage = (activeRep) => ({
+    type: SET_PAGE,
+    payload: activeRep,
+});
