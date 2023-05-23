@@ -36,6 +36,6 @@ npm run dev
 ## <a id="env"></a>Enviroment variables
 Create a .env file in the root of the project and add these variables:
 ```
-REACT_APP_GITHUB_TOKEN
+VITE_GITHUB_ACCESS_TOKEN
 ```
 
