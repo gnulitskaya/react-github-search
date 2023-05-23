@@ -1,7 +1,8 @@
 import { createContext, useState } from 'react';
 import { useQuery } from '@apollo/client';
-import {GET_REPOSITORIES, GET_REPOSITORY} from "../query/query.js";
+import {GET_REPOSITORIES, } from "../query/query.js";
 import {getPageCount} from "../utils/pages.js";
+//GET_REPOSITORY
 
 export const AppContext = createContext();
 

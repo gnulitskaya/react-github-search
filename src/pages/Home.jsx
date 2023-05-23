@@ -6,44 +6,37 @@ import RepositoryList from "../components/RepositoryList.jsx";
 import {AppContext} from "../contexts/AppContext.jsx";
 import {getPageCount, getPagesArray, getPagesPagination} from "../utils/pages.js";
 import Button from "../UI/Button.jsx";
+import {useDispatch, useSelector} from "react-redux";
+import {GET_REPOSITORIES} from "../query/query.js";
+import {setRepositories} from "../store/actions/repoActions.js";
+import {useQuery} from "@apollo/client";
 // import "./styles/App.scss";
 
 const Home = () => {
 
-    const { loading, data, page, fetchData, setAfter, first, setPage} = useContext(AppContext);
-    const endCursor = data?.search.pageInfo.endCursor;
+    const [first, setFirst] = useState(10);
+    const [after, setAfter] = useState(null);
+    const [location, setLocation] = useState('location:russia');
 
-    let pageNumberArray = getPagesArray(getPageCount(data?.search.repositoryCount, first));
+    const dispatch = useDispatch();
+    const repositories = useSelector((state) => state.repositories);
 
-    const handlePageClick = (cursor, number) => {
-        setAfter(cursor);
-        setPage(number);
-    };
+    const { loading, error, data } = useQuery(GET_REPOSITORIES, {
+        variables: { first, location, after },
+        onCompleted: (data) => dispatch(setRepositories(data.search.edges)),
+    });
 
-    // const changePage = (page) => {
-    //     //fetchData();
-    //     console.log(data)
-    //     setPage(page);
-    //     // setFirstPage(getPagesPagination(first, page)); // 16
-    //     setAfter(data?.search.pageInfo.endCursor);
-    // }
 
-    // useEffect(() => {
-    //
-    //     // setTotalPages(getPageCount(totalCount, first));
-    //     // pagesArray = getPagesArray(totalPages);
-    //     // console.log('totalCount', totalCount)
-    //     // console.log('pagesArray', pagesArray, totalPages)
-    //     // setTotalCount(data?.search.repositoryCount);
-    //
-    // }, []);
+    // const { loading, data, page, fetchData, setAfter, first, setPage} = useContext(AppContext);
+    // const endCursor = data?.search.pageInfo.endCursor;
 
-    // const pageNumbers = [];
-    //
-    // for (let i = 1; i <= 10; i++) {
-    //     pageNumbers.push(i);
-    // }
-    // console.log('pageNumbers', pageNumbers)
+    // let pageNumberArray = getPagesArray(getPageCount(data?.search.repositoryCount, first));
+
+    // const handlePageClick = (cursor, number) => {
+    //     setAfter(cursor);
+    //     setPage(number);
+    // };
+    console.log('repositories', repositories)
 
     return (
         <div className='wrapper'>
@@ -52,19 +45,21 @@ const Home = () => {
             {loading ? (
                 <Loading size='50' />
             ) : (
-                <RepositoryList data={data} fetchData={fetchData}/>
+                <RepositoryList data={repositories} />
             )}
 
-                <div className="pagination">
-                    {pageNumberArray.map(number =>
-                        <Button
-                            onClick={() => handlePageClick(number === 1 ? null : endCursor, number)}
-                            key={number}
-                            className={page === number ? 'current' : ''}>
-                            {number}
-                        </Button>
-                    )}
-                </div>
+            {/*fetchData={fetchData}*/}
+
+                {/*<div className="pagination">*/}
+                {/*    {pageNumberArray.map(number =>*/}
+                {/*        <Button*/}
+                {/*            onClick={() => handlePageClick(number === 1 ? null : endCursor, number)}*/}
+                {/*            key={number}*/}
+                {/*            className={page === number ? 'current' : ''}>*/}
+                {/*            {number}*/}
+                {/*        </Button>*/}
+                {/*    )}*/}
+                {/*</div>*/}
 
         </div>
     )

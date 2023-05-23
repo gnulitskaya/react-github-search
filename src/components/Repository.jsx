@@ -8,7 +8,7 @@ const Repository = (props) => {
     const navigate = useNavigate();
 
     const openMoreInfo = () => {
-        navigate(`/about/${rep.name}/${rep.owner.login}`);
+        navigate(`/about/${rep.id}`);
     }
 
     return (

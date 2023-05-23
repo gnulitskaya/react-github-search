@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const GET_REPOSITORIES = gql`
-query ($first: Int!, $location: String!, $after: String) {
+query GetRepos($first: Int!, $location: String!, $after: String) {
   search(query: $location, type: REPOSITORY, after: $after, first: $first) {
     repositoryCount
     edges {
@@ -13,9 +13,20 @@ query ($first: Int!, $location: String!, $after: String) {
             stargazerCount
             pushedAt
             url
+            description
+            languages(first: 10) {
+              edges {
+                node {
+                  id
+                  name
+                }
+              }
+            }
             owner {
                 id
                 login
+                avatarUrl
+                url
             }
         }
       }
@@ -30,56 +41,28 @@ query ($first: Int!, $location: String!, $after: String) {
 }
 `;
 
-// nodes {
-// ... on Repository {
+// export const GET_REPOSITORY = gql`
+// query GetRepoInfo($name: String!, $owner: String!) {
+//     repository(name: $name, owner: $owner) {
 //         id
 //         name
 //         stargazerCount
 //         pushedAt
-//         url
+//         description
+//         languages(first: 10) {
+//           edges {
+//             node {
+//               id
+//               name
+//             }
+//           }
+//         }
 //         owner {
 //             id
 //             login
+//             avatarUrl
+//             url
 //         }
 //     }
 // }
-
-// export const GET_PAGES = gql`
-// query GetPageNumber ($firstPage: Int!, $location: String!) {
-//   search(query: $location, type: REPOSITORY, first: $firstPage) {
-//     pageInfo {
-//       endCursor
-//       hasNextPage
-//       hasPreviousPage
-//       startCursor
-//     }
-//     repositoryCount
-//   }
-// }
 // `;
-
-export const GET_REPOSITORY = gql`
-query GetRepository($name: String!, $owner: String!) {
-    repository(name: $name, owner: $owner) {
-        id
-        name
-        stargazerCount
-        pushedAt
-        description
-        languages(first: 10) {
-          edges {
-            node {
-              id
-              name
-            }
-          }
-        }
-        owner {
-            id
-            login
-            avatarUrl
-            url
-        }
-    }
-}
-`;

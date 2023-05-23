@@ -10,7 +10,6 @@ const Header = () => {
                 <div className="search-field">
                     <SearchField />
                 </div>
-
             </div>
 
             <div className="circle one">
