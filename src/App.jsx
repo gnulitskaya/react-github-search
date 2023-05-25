@@ -1,15 +1,13 @@
 import React from "react";
-import "./styles/App.scss";
+import "./styles/index.scss";
 import AppRouter from "./components/AppRouter.jsx";
 
 function App() {
 
     return (
-
         <div>
             <AppRouter/>
         </div>
-
     )
 }
 

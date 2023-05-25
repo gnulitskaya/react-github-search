@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ApolloProvider } from "@apollo/client";
-import "./styles/index.css";
+import "./styles/index.scss";
 import App from "./App.jsx";
 import { client } from "./client/client.js";
 import {BrowserRouter} from "react-router-dom";

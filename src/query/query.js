@@ -40,29 +40,3 @@ query GetRepos($first: Int!, $search: String!, $after: String) {
   }
 }
 `;
-
-// export const GET_REPOSITORY = gql`
-// query GetRepoInfo($name: String!, $owner: String!) {
-//     repository(name: $name, owner: $owner) {
-//         id
-//         name
-//         stargazerCount
-//         pushedAt
-//         description
-//         languages(first: 10) {
-//           edges {
-//             node {
-//               id
-//               name
-//             }
-//           }
-//         }
-//         owner {
-//             id
-//             login
-//             avatarUrl
-//             url
-//         }
-//     }
-// }
-// `;
