@@ -3,8 +3,7 @@ import {
     SET_ACTIVE_REPOSITORY,
     SET_LOCATION,
     SET_AFTER,
-    SET_PAGE,
-    SAVE_DATA_TO_STORAGE
+    SET_PAGE
 } from '../types'
 
 export const setRepositories = (repositories) => ({
@@ -30,8 +29,4 @@ export const setAfter = (activeRep) => ({
 export const setPage = (activeRep) => ({
     type: SET_PAGE,
     payload: activeRep,
-});
-
-export const saveDataToStorage = () => ({
-    type: SAVE_DATA_TO_STORAGE,
 });

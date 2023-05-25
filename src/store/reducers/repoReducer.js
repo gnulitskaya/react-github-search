@@ -3,11 +3,11 @@ import {
     SET_ACTIVE_REPOSITORY,
     SET_LOCATION,
     SET_AFTER,
-    SET_PAGE,
-    SAVE_DATA_TO_STORAGE} from '../types';
+    SET_PAGE
+} from '../types';
 
 const initialState = {
-    data: [],
+    dataLocal: [],
     repositories: [],
     repositoryCount: null,
     activeRepository: null,
@@ -44,9 +44,6 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 page: action.payload,
             };
-        case SAVE_DATA_TO_STORAGE:
-            localStorage.setItem('data', JSON.stringify(state.data));
-            return state;
         default:
             return state;
     }
