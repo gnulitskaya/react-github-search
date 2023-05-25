@@ -6,7 +6,10 @@ React search app with Github GraphQL API
 
 Project developed for interview. It is a react client application that consumes Github GraphQL API to display information about repositories.
 
-Check out the [Demo]()!
+Check out the [Demo](http://graphql-react.gnulitskaya.ru/)!
+
+1. Главная страница – список репозиториев с возможностью поиска и страницами
+2. Карточка репозитория – страница с детальной информацией по репозиторию
 
 ## Stack
 - React
