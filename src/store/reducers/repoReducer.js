@@ -12,7 +12,7 @@ const initialState = {
     repositories: [],
     repositoryCount: null,
     activeRepository: null,
-    search: '',
+    search: 'user:gnulitskaya',
     after: null,
     first: 10,
     page: 1

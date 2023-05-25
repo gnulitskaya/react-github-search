@@ -8,31 +8,17 @@ const SearchField = () => {
     const search = useSelector((state) => state.search);
     const dispatch = useDispatch();
 
-    const handleSearch = (event) => {
-        // dispatch(setSearch(`repository: ${event.target.value}`));
-        console.log('search', search);
-
+    const searchUsers = (e) => {
         clearTimeout(typingTimer);
 
         typingTimer = setTimeout(() => {
-            // setSearchValue(e.target.value);
-            let value = event.target.value;
-            dispatch(setSearch(`search:${value}`))
+            dispatch(setSearch(`name:${e.target.value}`))
         }, 600);
     };
 
-    // const searchUsers = (e) => {
-    //     clearTimeout(typingTimer);
-    //
-    //     typingTimer = setTimeout(() => {
-    //         // setSearchValue(e.target.value);
-    //         dispatch(setSearch(`${e.target.value} location:${search}`))
-    //     }, 600);
-    // };
-
     return (
         <div className="input">
-            <input type='text' onChange={handleSearch} placeholder='Search' value={search} />
+            <input type='text' onChange={searchUsers}/>
         </div>
     );
 };

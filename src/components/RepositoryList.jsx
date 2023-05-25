@@ -1,16 +1,8 @@
 import React, {useEffect} from 'react';
 import Repository from "./Repository.jsx";
-import {setSearch} from "../store/actions/repoActions.js";
-import {useDispatch} from "react-redux";
 
 const RepositoryList = ({data}) => {
-    console.log('repositories', data);
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        if (data.edges == null && data.edges.length <= 0)
-        dispatch(setSearch(`user:gnulitskaya`));
-    });
+    // console.log('repositories', data);
 
     return (
         <div className='repository-list'>

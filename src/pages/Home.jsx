@@ -17,13 +17,10 @@ const Home = () => {
     const after = useSelector((state) => state.after);
     const search = useSelector((state) => state.search);
     const page = useSelector((state) => state.page);
-    const local = useSelector((state) => state.dataLocal);
-    console.log('local', local)
 
     const { loading, error, data } = useQuery(GET_REPOSITORIES, {
         variables: { first, search, after },
         onCompleted: data => {
-            console.log('data', data);
             dispatch(setRepositories(data.search));
         },
     });
