@@ -15,13 +15,13 @@ const Home = () => {
     const repositories = useSelector((state) => state.repositories);
     const first = useSelector((state) => state.first);
     const after = useSelector((state) => state.after);
-    const location = useSelector((state) => state.location);
+    const search = useSelector((state) => state.search);
     const page = useSelector((state) => state.page);
     const local = useSelector((state) => state.dataLocal);
     console.log('local', local)
 
     const { loading, error, data } = useQuery(GET_REPOSITORIES, {
-        variables: { first, location, after },
+        variables: { first, search, after },
         onCompleted: data => {
             console.log('data', data);
             dispatch(setRepositories(data.search));

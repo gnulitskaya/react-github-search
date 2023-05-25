@@ -15,10 +15,10 @@ const About = () => {
 
     const first = useSelector((state) => state.first);
     const after = useSelector((state) => state.after);
-    const location = useSelector((state) => state.location);
+    const search = useSelector((state) => state.search);
 
     const { loading, error, data } = useQuery(GET_REPOSITORIES, {
-        variables: { first, location, after },
+        variables: { first, search, after },
         onCompleted: (data) => dispatch(setRepositoryActive(
             data.search.edges.find(rep => rep.node.id === params.id).node)),
     });

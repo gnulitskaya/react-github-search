@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_REPOSITORIES = gql`
-query GetRepos($first: Int!, $location: String!, $after: String) {
-  search(query: $location, type: REPOSITORY, after: $after, first: $first) {
+query GetRepos($first: Int!, $search: String!, $after: String) {
+  search(query: $search, type: REPOSITORY, after: $after, first: $first) {
     repositoryCount
     edges {
       cursor

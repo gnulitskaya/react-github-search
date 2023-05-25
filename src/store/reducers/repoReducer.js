@@ -1,17 +1,18 @@
 import {
     SET_REPOSITORIES,
     SET_ACTIVE_REPOSITORY,
-    SET_LOCATION,
+    SET_SEARCH,
     SET_AFTER,
-    SET_PAGE
+    SET_PAGE,
+    SET_USER
 } from '../types';
 
 const initialState = {
-    dataLocal: [],
+    user: null,
     repositories: [],
     repositoryCount: null,
     activeRepository: null,
-    location: 'location:all',
+    search: '',
     after: null,
     first: 10,
     page: 1
@@ -29,10 +30,10 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 activeRepository: action.payload,
             };
-        case SET_LOCATION:
+        case SET_SEARCH:
             return {
                 ...state,
-                location: action.payload,
+                search: action.payload,
             };
         case SET_AFTER:
             return {
@@ -43,6 +44,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 page: action.payload,
+            };
+        case SET_USER:
+            return {
+                ...state,
+                user: action.payload,
             };
         default:
             return state;

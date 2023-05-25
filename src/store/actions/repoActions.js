@@ -1,9 +1,10 @@
 import {
     SET_REPOSITORIES,
     SET_ACTIVE_REPOSITORY,
-    SET_LOCATION,
+    SET_SEARCH,
     SET_AFTER,
-    SET_PAGE
+    SET_PAGE,
+    SET_USER
 } from '../types'
 
 export const setRepositories = (repositories) => ({
@@ -16,17 +17,22 @@ export const setRepositoryActive = (activeRep) => ({
     payload: activeRep,
 });
 
-export const setLocation = (activeRep) => ({
-    type: SET_LOCATION,
-    payload: activeRep,
+export const setSearch = (search) => ({
+    type: SET_SEARCH,
+    payload: search,
 });
 
-export const setAfter = (activeRep) => ({
+export const setAfter = (after) => ({
     type: SET_AFTER,
-    payload: activeRep,
+    payload: after,
 });
 
-export const setPage = (activeRep) => ({
+export const setUser = (user) => ({
+    type: SET_USER,
+    payload: user,
+});
+
+export const setPage = (page) => ({
     type: SET_PAGE,
-    payload: activeRep,
+    payload: page,
 });
