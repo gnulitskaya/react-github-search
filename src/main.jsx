@@ -8,26 +8,7 @@ import {BrowserRouter} from "react-router-dom";
 import {createStore} from "redux";
 import {Provider} from "react-redux";
 import rootReducer from "./store/reducers/repoReducer.js";
-
-function saveToLocalStorage(state) {
-    try {
-        const serialisedState = JSON.stringify(state);
-        localStorage.setItem("persistantState", serialisedState);
-    } catch (e) {
-        console.warn(e);
-    }
-}
-
-function loadFromLocalStorage() {
-    try {
-        const serialisedState = localStorage.getItem("persistantState");
-        if (serialisedState === null) return undefined;
-        return JSON.parse(serialisedState);
-    } catch (e) {
-        console.warn(e);
-        return undefined;
-    }
-}
+import {loadFromLocalStorage, saveToLocalStorage} from "./utils/localStorage.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const store = createStore(rootReducer, loadFromLocalStorage());
